@@ -2,9 +2,33 @@ use std::time::Duration;
 
 use serenity::{model::prelude::{interaction::InteractionResponseType, Member}, prelude::Context};
 
-use crate::get_all_subjects;
+const ALL_ROLES: &[&str] = &[
+    "maths",
+    "further-maths",
+    "computer-science",
+    "physics",
+    "chemistry",
+    "biology",
+    "psychology",
+    "sociology",
+    "english-language",
+    "english-literature",
+    "business",
+    "media-studies",
+    "history",
+    "geography",
+    "religious-studies",
+    "law",
+    "french",
+    "german",
+    "spanish",
+    "drama-theater-dance",
+    "music",
+    "product-design",
+    "art"
+]; 
 
-const ALL_ROLES: &[u64] = &[1083129821544071312,
+const ALL_ROLES_IDS: &[u64] = &[1083129821544071312,
 1083130239422570608,
 1083171414774906923,
 1083130459711602739,
@@ -29,7 +53,7 @@ const ALL_ROLES: &[u64] = &[1083129821544071312,
 1083173781985566760,];
 
 pub async fn set_member_roles(ctx: &Context, mut member: Member) {
-    for role in ALL_ROLES {
+    for role in ALL_ROLES_IDS {
         member.remove_role(&ctx.http, *role).await.unwrap();
     }
 
@@ -41,7 +65,7 @@ pub async fn set_member_roles(ctx: &Context, mut member: Member) {
                     menu.custom_id("first");
                     menu.placeholder("None");
                     menu.options(|f| {
-                        for subj in get_all_subjects() {
+                        for subj in ALL_ROLES {
                             f.create_option(|o| o.label(&subj).value(&subj));
                         }
                         f

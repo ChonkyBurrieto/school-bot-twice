@@ -1,6 +1,5 @@
 use core::panic;
 use std::collections::{HashSet, HashMap};
-use std::fs;
 use std::sync::Arc;
 
 use serenity::async_trait;
@@ -13,11 +12,6 @@ use serenity::model::channel::Message;
 use serenity::model::gateway::Ready;
 use serenity::model::prelude::Member;
 use serenity::prelude::*;
-
-fn get_all_subjects() -> Vec<String> {
-    let file = fs::read_to_string("assets/subjects.json").unwrap();
-    serde_json::from_str(&file).unwrap()
-}
 
 struct ShardManagerContainer;
 impl TypeMapKey for ShardManagerContainer {
