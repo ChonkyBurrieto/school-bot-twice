@@ -15,7 +15,7 @@ use serenity::model::prelude::Member;
 use serenity::prelude::*;
 
 fn get_all_subjects() -> Vec<String> {
-    let file = fs::read_to_string("assets/subjects.json").unwrap();
+    let file = fs::read_to_string("../assets/subjects.json").unwrap();
     serde_json::from_str(&file).unwrap()
 }
 
